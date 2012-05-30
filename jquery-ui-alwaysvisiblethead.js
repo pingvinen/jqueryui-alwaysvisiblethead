@@ -13,6 +13,8 @@
 	 * Author: Patrick Timm, patrick@isharp.dk
 	 * Version: 2012-05-30
 	 *
+	 * https://github.com/pingvinen/jqueryui-alwaysvisiblethead
+	 *
 	 * Requires:
 	 * jQuery 1.7.2
 	 * jQueryUI 1.8.20
