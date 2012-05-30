@@ -95,7 +95,9 @@
 			
 			$table.append($thead);
 			
-			return $table.css("background-color", this._findBackgroundColor());
+			return $table
+						.css("width", this.$element.css("width"))
+						.css("background-color", this._findBackgroundColor());
 		},
 		
 		/**
