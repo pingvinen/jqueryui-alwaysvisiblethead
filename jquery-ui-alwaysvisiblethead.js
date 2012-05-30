@@ -95,22 +95,7 @@
 			
 			$table.append($thead);
 			
-			// create the movable container, and make
-			// sure that it takes over the position of the
-			// actual table
-			var $container = $("<div></div>")
-								.css("background-color", this._findBackgroundColor())
-								.css("position", $table.css("position"))
-								.css("top", $table.css("top"))
-								.css("left", $table.css("left"))
-								.css("right", $table.css("right"))
-								.css("bottom", $table.css("bottom"))
-								.append($table);
-
-			// positioning is done on the container
-			$table.css("position", "static");
-
-			return $container;
+			return $table.css("background-color", this._findBackgroundColor());
 		},
 		
 		/**
