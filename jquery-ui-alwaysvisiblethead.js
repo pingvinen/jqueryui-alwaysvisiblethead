@@ -11,7 +11,7 @@
 	 * in any way.
 	 *
 	 * Author: Patrick Timm, patrick@isharp.dk
-	 * Version: 2012-05-30
+	 * Version: 2012-06-09
 	 *
 	 * https://github.com/pingvinen/jqueryui-alwaysvisiblethead
 	 *
@@ -29,7 +29,16 @@
 			 * Default = "#fff"
 			 * @type String
 			 */
-			"fallbackBackgroundColor": "#fff"
+			"fallbackBackgroundColor": "#fff",
+			
+			/**
+			 * An offset (in pixels) to use for determining
+			 * when to enable the moving thead
+			 * and at what position to place it
+			 * Default = 0
+			 * @type Int
+			 */
+			"topOffset": 0
 		},
 		
 		/**
@@ -49,7 +58,7 @@
 		 * Handles the scroll event
 		 */
 		"_onScroll": function(event) {
-			var docScrollTop = $(document).scrollTop();
+			var docScrollTop = $(document).scrollTop() + this.options.topOffset;
 			var tblTop = this.$element.offset().top;
 			
 			if (docScrollTop > tblTop) {
@@ -58,7 +67,7 @@
 					this.$element.parent().append(this.$movable);
 					this.$movable
 							.css("position", "fixed")
-							.css("top", 0);
+							.css("top", this.options.topOffset);
 				}
 			}
 			else {

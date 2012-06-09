@@ -34,6 +34,13 @@ Options
 		<td>"#fff"</td>
 		<td>The background color to use for the movable container, in the event that a proper background color cannot be found</td>
 	</tr>
+	
+	<tr>
+		<td>topOffset</td>
+		<td>Integer</td>
+		<td>0</td>
+		<td>An offset (in pixels) to use for determining when to enable the moving thead and at what position to place it</td>
+	</tr>
 
 </table>
 
