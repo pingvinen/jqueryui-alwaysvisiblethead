@@ -10,8 +10,8 @@
 	 * This widget does not alter the "wrapped" table
 	 * in any way.
 	 *
-	 * Author: Patrick Timm, patrick@isharp.dk
-	 * Version: 2012-06-09
+	 * Author: pingvinen
+	 * Version: 2014-07-27
 	 *
 	 * https://github.com/pingvinen/jqueryui-alwaysvisiblethead
 	 *
@@ -92,23 +92,46 @@
 			
 			// manually copy the width of each column (as clone does not do this)
 			// in each row
-			$originalThead.find("tr").each(function(rowIndex, rowElm) {
+			$originalThead.find("tr").each($.proxy(function(rowIndex, rowElm) {
 				var $row = $(rowElm);
-				$row.find("th").each(function(cellIndex, cellElm) {
+				$row.find("th").each($.proxy(function(cellIndex, cellElm) {
 					var $cell = $(cellElm);
 					
-					$(
+					var $clone = $(
 						$( $thead.find("tr")[rowIndex] )
 							.find("th")[cellIndex]
-					).css("width", $cell.css("width"));
-				});
-			});
+					);
+
+					$clone.css("width", $cell.css("width"));
+					this._addEventHandlers($cell, $clone);
+				}, this));
+			}, this));
 			
 			$table.append($thead);
 			
 			return $table
 						.css("width", this.$element.css("width"))
 						.css("background-color", this._findBackgroundColor());
+		},
+
+		"_addEventHandlers": function($original, $clone) {
+			// inspired by
+			// http://stackoverflow.com/a/10332551
+
+			var events = $._data($original.get(0), 'events');
+
+			if (events === undefined) {
+				return;
+			}
+
+			for (var x in events) {
+				// x = event type (e.g. 'click')
+				// instead of "copying" the handler, we just trigger
+				// the event on the original element. This should make
+				// this more robust if used in a system where the handlers
+				// are changed
+				$clone.bind(x, function() { $original.trigger(x); });
+			}
 		},
 		
 		/**
